@@ -21,3 +21,8 @@ packages = { find = { where = ["src"], include = ["dodo_kedro*"] } }
 [project.urls]
 homepage = "https://www.dodobird.ai"
 repository = "https://github.com/dodobird-ai/tools-kedro"
+
+
+# # WARNING: this are just notes from kedro's documentation
+# [project.entry-points."kedro.hooks"]
+# plugin_name = "plugin_name.plugin:hooks"
