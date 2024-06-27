@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["find:", {"where": ["src"]}]
+packages = { find = { where = ["src"], include = ["dodo_kedro*"] } }
 
 [project.urls]
 homepage = "https://www.dodobird.ai"
