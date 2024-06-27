@@ -19,6 +19,5 @@ dependencies = [
 packages = ["find:", {"where": ["src"]}]
 
 [project.urls]
-homepage = "https://dodobird.ai"
-repository = "https://github.com/dodobird-ai/tools-kedro":w
-
+homepage = "https://www.dodobird.ai"
+repository = "https://github.com/dodobird-ai/tools-kedro"
