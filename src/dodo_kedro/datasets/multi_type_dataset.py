@@ -1,6 +1,6 @@
 import logging
 
-from kedro.io import AbstractDataset
+from kedro.io import AbstractDataset, DatasetError
 from kedro.io.core import parse_dataset_definition
 
 
@@ -29,7 +29,18 @@ class MultiTypeDataset(AbstractDataset):
         data = {}
 
         for dataset in self.datasets:
-            data[dataset.__class__.__name__] = dataset.load()
+            # HACK:
+            # motivation: loading a kedro-mlflow dataset requires a run-id
+            # and therefore failswith a plain dataset.load()
+            # FIX: we must of course pass the load_args & save_args !!!!
+            # note: this won't fix the issue with kedro-mlflow... 
+            # (we can't hardcode the run_id in the load_args...)
+            try:
+                dataset_name = dataset.__class__.__name__
+                data[dataset_name] = dataset.load()
+            except DatasetError:
+                #TODO: add the very last message in the traceback ?
+                logger.warn(f"Failed to load {dataset_name}")
 
             # TODO: first check that the data is actually the same.
             # TODO: precedence ? parquet is better than csv etc...???
