@@ -38,16 +38,18 @@ class MultiTypeDataset(AbstractDataset):
             try:
                 dataset_name = dataset.__class__.__name__
                 data[dataset_name] = dataset.load()
+
+                # HACK: FOR NOW...since all the datasets contain the same data
+                # we simply return the first one
+                return next(iter(data.values()))
+                # TODO: first check that the data is actually the same.
+                # TODO: precedence ? parquet is better than csv etc...???
+
             except DatasetError:
                 #TODO: add the very last message in the traceback ?
                 logger.warn(f"Failed to load {dataset_name}")
 
-            # TODO: first check that the data is actually the same.
-            # TODO: precedence ? parquet is better than csv etc...???
 
-            # WARNING: since all the datasets contain the same data
-            # we simply return the first one
-            return next(iter(data.values()))
 
     def _save(self, data):
         """Saves data to all configured datasets."""
