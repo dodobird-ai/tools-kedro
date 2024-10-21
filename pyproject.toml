@@ -10,9 +10,10 @@ authors = [{name = "Marc GRIS", email = "marc@dodobird.ai"}]
 license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.9"
-
 dependencies = [
-    "kedro>=0.19.1"
+    "kedro>=0.19.1",
+    "cryptography",
+    "pyfakefs"
 ]
 
 [tool.setuptools]
@@ -22,7 +23,6 @@ packages = { find = { where = ["src"], include = ["dodo_kedro*"] } }
 homepage = "https://www.dodobird.ai"
 repository = "https://github.com/dodobird-ai/tools-kedro"
 
-
-# # WARNING: this are just notes from kedro's documentation
+# WARNING: these are just notes from kedro's documentation
 # [project.entry-points."kedro.hooks"]
 # plugin_name = "plugin_name.plugin:hooks"
